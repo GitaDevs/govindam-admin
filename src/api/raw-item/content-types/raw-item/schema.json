@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "raw_items",
+  "info": {
+    "singularName": "raw-item",
+    "pluralName": "raw-items",
+    "displayName": "Raw Item",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "current_price": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "raw_items"
+    },
+    "sub_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "raw_items"
+    },
+    "purchasing_unit": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::unit.unit",
+      "inversedBy": "raw_items"
+    },
+    "consumption_unit": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::unit.unit",
+      "inversedBy": "raw_items"
+    },
+    "converstion_ratio": {
+      "type": "float"
+    }
+  }
+}

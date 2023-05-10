@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categories",
+  "info": {
+    "singularName": "category",
+    "pluralName": "categories",
+    "displayName": "Category"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "MAIN",
+        "SUB"
+      ],
+      "default": "MAIN",
+      "required": true
+    },
+    "category_type": {
+      "type": "enumeration",
+      "enum": [
+        "RAW_ITEM",
+        "DISH"
+      ],
+      "default": "RAW_ITEM",
+      "required": false
+    },
+    "raw_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::raw-item.raw-item",
+      "mappedBy": "sub_category"
+    }
+  }
+}

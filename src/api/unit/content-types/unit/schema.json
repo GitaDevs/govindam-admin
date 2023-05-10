@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "units",
+  "info": {
+    "singularName": "unit",
+    "pluralName": "units",
+    "displayName": "Unit"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "abbreviation": {
+      "type": "string"
+    },
+    "hint_message": {
+      "type": "string"
+    },
+    "raw_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::raw-item.raw-item",
+      "mappedBy": "consumption_unit"
+    }
+  }
+}
