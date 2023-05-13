@@ -21,29 +21,25 @@
       "required": true,
       "default": 0
     },
-    "category": {
+    "categories": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::category.category",
-      "inversedBy": "raw_items"
+      "relation": "oneToMany",
+      "target": "api::category.category"
     },
-    "sub_category": {
+    "sub_categories": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::category.category",
-      "inversedBy": "raw_items"
+      "relation": "oneToMany",
+      "target": "api::category.category"
     },
-    "purchasing_unit": {
+    "purchasing_units": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::unit.unit",
-      "inversedBy": "raw_items"
+      "relation": "oneToMany",
+      "target": "api::unit.unit"
     },
-    "consumption_unit": {
+    "consumption_units": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::unit.unit",
-      "inversedBy": "raw_items"
+      "relation": "oneToMany",
+      "target": "api::unit.unit"
     },
     "converstion_ratio": {
       "type": "float"

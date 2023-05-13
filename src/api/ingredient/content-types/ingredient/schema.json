@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ingredients",
+  "info": {
+    "singularName": "ingredient",
+    "pluralName": "ingredients",
+    "displayName": "Ingredient"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "dishes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::dish.dish"
+    },
+    "raw_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::raw-item.raw-item"
+    },
+    "quantity": {
+      "type": "integer",
+      "required": true,
+      "default": 1
+    }
+  }
+}

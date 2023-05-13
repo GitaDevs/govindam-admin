@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employees",
+  "info": {
+    "singularName": "employee",
+    "pluralName": "employees",
+    "displayName": "Employee",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "salary": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "role_description": {
+      "type": "string"
+    },
+    "payment_frequency": {
+      "type": "integer",
+      "required": true
+    },
+    "phone_number": {
+      "type": "string"
+    },
+    "email_id": {
+      "type": "email"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "users": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

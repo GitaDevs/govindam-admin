@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "inventories",
+  "info": {
+    "singularName": "inventory",
+    "pluralName": "inventories",
+    "displayName": "Inventory",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "users": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "raw_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::raw-item.raw-item"
+    },
+    "purchased_price": {
+      "type": "decimal",
+      "required": true
+    },
+    "expected_price": {
+      "type": "decimal",
+      "required": true
+    },
+    "buyed_qty": {
+      "type": "integer",
+      "required": true
+    },
+    "last_qty": {
+      "type": "integer",
+      "required": true
+    }
+  }
+}

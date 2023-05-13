@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "menus",
+  "info": {
+    "singularName": "menu",
+    "pluralName": "menus",
+    "displayName": "Menu"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "meal": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::meal.meal"
+    },
+    "dish": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::dish.dish"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "meal",
+        "dish"
+      ],
+      "required": true
+    },
+    "serving_date": {
+      "type": "date"
+    },
+    "serving_type": {
+      "type": "enumeration",
+      "enum": [
+        "morning",
+        "evening",
+        "special"
+      ],
+      "required": true
+    }
+  }
+}

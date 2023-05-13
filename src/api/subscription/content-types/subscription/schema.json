@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "subscriptions",
+  "info": {
+    "singularName": "subscription",
+    "pluralName": "subscriptions",
+    "displayName": "Subscription"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "monthly",
+        "quarterly"
+      ],
+      "required": true,
+      "default": "monthly"
+    },
+    "breakfast": {
+      "type": "boolean",
+      "required": true
+    },
+    "lunch": {
+      "type": "boolean",
+      "required": true
+    },
+    "dinner": {
+      "type": "boolean",
+      "required": true
+    },
+    "price": {
+      "type": "decimal",
+      "required": true
+    }
+  }
+}

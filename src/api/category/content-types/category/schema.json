@@ -31,12 +31,6 @@
       ],
       "default": "RAW_ITEM",
       "required": false
-    },
-    "raw_items": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::raw-item.raw-item",
-      "mappedBy": "sub_category"
     }
   }
 }

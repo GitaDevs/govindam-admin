@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "meal_items",
+  "info": {
+    "singularName": "meal-item",
+    "pluralName": "meal-items",
+    "displayName": "Meal Item",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "meals": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::meal.meal"
+    },
+    "dishes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::dish.dish"
+    }
+  }
+}
