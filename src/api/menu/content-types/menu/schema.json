@@ -4,7 +4,8 @@
   "info": {
     "singularName": "menu",
     "pluralName": "menus",
-    "displayName": "Menu"
+    "displayName": "Menu",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,29 +17,21 @@
       "relation": "oneToOne",
       "target": "api::meal.meal"
     },
-    "dish": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::dish.dish"
-    },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "meal",
-        "dish"
-      ],
-      "required": true
-    },
-    "serving_date": {
-      "type": "date"
-    },
-    "serving_type": {
+    "serving_time": {
       "type": "enumeration",
       "enum": [
         "morning",
-        "evening",
-        "special"
+        "evening"
       ],
+      "required": true
+    },
+    "is_special": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "serving_date_time": {
+      "type": "datetime",
       "required": true
     }
   }

@@ -38,9 +38,9 @@
       "relation": "oneToMany",
       "target": "api::category.category"
     },
-    "units": {
+    "unit": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "oneToOne",
       "target": "api::unit.unit"
     }
   }

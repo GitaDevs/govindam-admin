@@ -12,22 +12,28 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "users": {
+    "user": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "plugin::users-permissions.user"
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "orders"
+    },
+    "is_rejected": {
+      "type": "boolean"
+    },
+    "is_accepted": {
+      "type": "boolean"
     },
     "menus": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::menu.menu"
     },
-    "is_auto_generated": {
-      "type": "boolean",
-      "required": true
+    "health_issue": {
+      "type": "string"
     },
-    "is_cancelled": {
-      "type": "boolean"
+    "meal_instructions": {
+      "type": "text"
     }
   }
 }
