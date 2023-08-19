@@ -5,7 +5,7 @@
 import { factories } from '@strapi/strapi'
 import { IOrderCreateRequestBody, IOrderUpdateRequestBody } from '../type/order';
 import { ErrorFactory, handleError } from '../../../errors/helpers';
-import { MENU_NOT_FOUND, NOT_SPECIAL_MENU, ORDER_CREATION_TIME_PASSED, ORDER_UNABLE_TO_UPDATE } from '../../../errors/error-messages';
+import { MENU_NOT_FOUND, NOT_SPECIAL_MENU, ORDER_ALREADY_ACCEPTED, ORDER_CREATION_TIME_PASSED, ORDER_NOT_FOUND, ORDER_UNABLE_TO_UPDATE } from '../../../errors/error-messages';
 import { DateTime } from 'luxon';
 import { has } from 'lodash';
 
@@ -34,7 +34,7 @@ export default factories.createCoreController('api::order.order', ({ strapi}) =>
               { id: menu.id }
             ]
           },
-          user: {
+          users: {
             connect: [
               { id: userId }
             ]
@@ -56,23 +56,20 @@ export default factories.createCoreController('api::order.order', ({ strapi}) =>
     try {
       const body = ctx.request.body as IOrderUpdateRequestBody;
       const { id } = ctx.params;
+      const userRole = ctx.state.user.role.type;
 
-      if(!has(body, "isAccepted")) {
-        throw new ErrorFactory("VALIDATION_ERROR", ORDER_UNABLE_TO_UPDATE)
+      let results;
+
+      if(userRole == "cook") { // cook
+        results = await strapi.service("api::order.order").cookOrderUpdate(id, body);
+      } else { // customer        
+        results = await strapi.service("api::order.order").customerOrderUpdate(id, body);
       }
 
-      const isAccepted = body.isAccepted
-
-      const updatedOrder = await strapi.entityService.update("api::order.order", Number(id), {
-        data: {
-          is_accepted: isAccepted
-        }
-      })
-
-      const sanitizedResults = await this.sanitizeOutput(updatedOrder, ctx);
+      const sanitizedResults = await this.sanitizeOutput(results, ctx);
       return this.transformResponse(sanitizedResults);
     } catch(error) {
       return handleError(error, ctx);
     }
-  }
+  },
 }));

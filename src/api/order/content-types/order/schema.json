@@ -12,11 +12,10 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "user": {
+    "users": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "orders"
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user"
     },
     "is_accepted": {
       "type": "boolean"
@@ -31,6 +30,9 @@
     },
     "meal_instructions": {
       "type": "text"
+    },
+    "accepted_at": {
+      "type": "datetime"
     }
   }
 }

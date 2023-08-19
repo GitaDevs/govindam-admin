@@ -13,7 +13,7 @@ module.exports = {
       path: "/special-order/:id",
       handler: "order.specialOrderUpdate",
       config: {
-        policies: ["global::only-cook"]
+        policies: ["global::only-cook-customer"]
       }
     },
   ],
