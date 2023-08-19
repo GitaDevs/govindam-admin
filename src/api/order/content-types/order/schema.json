@@ -18,9 +18,6 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "orders"
     },
-    "is_rejected": {
-      "type": "boolean"
-    },
     "is_accepted": {
       "type": "boolean"
     },

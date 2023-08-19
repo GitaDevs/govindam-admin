@@ -14,6 +14,10 @@
     "@strapi/plugin-users-permissions": "4.10.2",
     "@strapi/strapi": "4.10.2",
     "@strapi/utils": "^4.12.5",
+    "@types/lodash": "^4.14.197",
+    "@types/luxon": "^3.3.1",
+    "lodash": "^4.17.21",
+    "luxon": "^3.4.0",
     "pg": "8.8.0"
   },
   "author": {

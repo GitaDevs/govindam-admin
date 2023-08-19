@@ -1,0 +1,1 @@
+export const ACCEPT_ORDER_REQUEST_BEFORE = 3; // in hours
