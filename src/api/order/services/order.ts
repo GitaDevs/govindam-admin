@@ -9,6 +9,7 @@ import { ErrorFactory } from '../../../errors/helpers';
 import { ORDER_ALREADY_ACCEPTED, ORDER_NOT_FOUND, ORDER_UNABLE_TO_UPDATE } from '../../../errors/error-messages';
 import { IOrderUpdateRequestBody } from '../type/order';
 import { has, pick } from 'lodash';
+import { ORDER_API_NAME } from '../controllers/order';
 
 export default factories.createCoreService('api::order.order', ({ strapi}) => ({
   orderCreationTimeValid(menuTime: DateTime): boolean {
@@ -30,7 +31,7 @@ export default factories.createCoreService('api::order.order', ({ strapi}) => ({
 
     if(orderExists.is_accepted) throw new ErrorFactory("VALIDATION_ERROR", ORDER_ALREADY_ACCEPTED)
 
-    const updatedOrder = await strapi.entityService.update("api::order.order", Number(orderId), {
+    const updatedOrder = await strapi.entityService.update(ORDER_API_NAME, Number(orderId), {
       data: {
         is_accepted: isAccepted,
         accepted_at: DateTime.local().toISO()
@@ -47,7 +48,7 @@ export default factories.createCoreService('api::order.order', ({ strapi}) => ({
 
     await this.orderExist(orderId);
 
-    const updatedOrder = await strapi.entityService.update("api::order.order", Number(orderId), {
+    const updatedOrder = await strapi.entityService.update(ORDER_API_NAME, Number(orderId), {
       data: {
         health_issue: updateData.healthIssue,
         meal_instructions: updateData.mealInstructions

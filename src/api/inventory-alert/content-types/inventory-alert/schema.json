@@ -22,10 +22,18 @@
       "default": false,
       "required": true
     },
-    "users": {
+    "created_by_users": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "plugin::users-permissions.user"
+    },
+    "request_fullfilled_by_users": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user"
+    },
+    "request_fullfilled_at": {
+      "type": "datetime"
     }
   }
 }
