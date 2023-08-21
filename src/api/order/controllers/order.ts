@@ -5,14 +5,15 @@
 import { factories } from '@strapi/strapi'
 import { IOrderCreateRequestBody, IOrderUpdateRequestBody } from '../type/order';
 import { ErrorFactory, handleError } from '../../../errors/helpers';
-import { MENU_NOT_FOUND, NOT_SPECIAL_MENU, ORDER_CREATION_TIME_PASSED, ORDER_UNABLE_TO_UPDATE } from '../../../errors/error-messages';
+import { MENU_NOT_FOUND, NOT_SPECIAL_MENU, ORDER_CREATION_TIME_PASSED } from '../../../errors/error-messages';
 import { DateTime } from 'luxon';
-import { has } from 'lodash';
 
-export default factories.createCoreController('api::order.order', ({ strapi}) => ({
+export const ORDER_API_NAME = "api::order.order";
+
+export default factories.createCoreController(ORDER_API_NAME, ({ strapi}) => ({
   async specialOrderCreate(ctx) {
     try {
-      const body = ctx.request.body as IOrderCreateRequestBody;
+      const body = ctx.request.body.data as IOrderCreateRequestBody;
       const userId = ctx.state.user.id;
 
       const menuId = body.menuId;
@@ -24,17 +25,17 @@ export default factories.createCoreController('api::order.order', ({ strapi}) =>
 
       const menuTime: DateTime = DateTime.fromISO(menu.serving_date_time);
 
-      if(!strapi.service("api::order.order").orderCreationTimeValid(menuTime))
+      if(!strapi.service(ORDER_API_NAME).orderCreationTimeValid(menuTime))
         throw new ErrorFactory("VALIDATION_ERROR", ORDER_CREATION_TIME_PASSED);
 
-      const newOrder = await strapi.entityService.create("api::order.order", {
+      const newOrder = await strapi.entityService.create(ORDER_API_NAME, {
         data: {
           menus: {
             connect: [
               { id: menu.id }
             ]
           },
-          user: {
+          users: {
             connect: [
               { id: userId }
             ]
@@ -54,25 +55,22 @@ export default factories.createCoreController('api::order.order', ({ strapi}) =>
 
   async specialOrderUpdate(ctx) {
     try {
-      const body = ctx.request.body as IOrderUpdateRequestBody;
+      const body = ctx.request.body.data as IOrderUpdateRequestBody;
       const { id } = ctx.params;
+      const userRole = ctx.state.user.role.type;
 
-      if(!has(body, "isAccepted")) {
-        throw new ErrorFactory("VALIDATION_ERROR", ORDER_UNABLE_TO_UPDATE)
+      let results;
+
+      if(userRole == "cook") { // cook
+        results = await strapi.service(ORDER_API_NAME).cookOrderUpdate(id, body);
+      } else { // customer        
+        results = await strapi.service(ORDER_API_NAME).customerOrderUpdate(id, body);
       }
 
-      const isAccepted = body.isAccepted
-
-      const updatedOrder = await strapi.entityService.update("api::order.order", Number(id), {
-        data: {
-          is_accepted: isAccepted
-        }
-      })
-
-      const sanitizedResults = await this.sanitizeOutput(updatedOrder, ctx);
+      const sanitizedResults = await this.sanitizeOutput(results, ctx);
       return this.transformResponse(sanitizedResults);
     } catch(error) {
       return handleError(error, ctx);
     }
-  }
+  },
 }));

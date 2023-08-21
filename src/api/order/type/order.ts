@@ -6,4 +6,6 @@ export interface IOrderCreateRequestBody {
 
 export interface IOrderUpdateRequestBody {
   isAccepted?: boolean;
+  healthIssue?: string;
+  mealInstructions?: string;
 }

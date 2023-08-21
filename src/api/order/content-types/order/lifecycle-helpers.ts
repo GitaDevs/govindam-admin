@@ -1,14 +1,14 @@
-import { ApplicationError } from "@strapi/utils/dist/errors";
 import { USER_MENU_SHOULD_UNIQUE_IN_ORDER } from "../../../../errors/error-messages";
 import { ErrorFactory } from "../../../../errors/helpers";
+import { ORDER_API_NAME } from "../../controllers/order";
 
 export async function validateUserAndMenuUnique(data) {
-  const userId = data.user.connect[0].id
+  const userId = data.users.connect[0].id
   const menuIds = data.menus.connect.map(data => data.id);
 
-  const orderExists = await strapi.db.query('api::order.order').findOne({
+  const orderExists = await strapi.db.query(ORDER_API_NAME).findOne({
     where: {
-      user: userId,
+      users: userId,
       menus: menuIds
     },
   })

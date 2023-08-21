@@ -5,5 +5,5 @@ export default {
     const { data } = event.params;
 
     await validateUserAndMenuUnique(data)  
-  },
+  }
 }
