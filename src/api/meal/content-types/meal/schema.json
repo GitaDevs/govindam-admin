@@ -20,11 +20,19 @@
       "type": "decimal",
       "required": true
     },
-    "meal_items": {
+    "menus": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::meal-item.meal-item",
-      "mappedBy": "meal"
+      "target": "api::menu.menu"
+    },
+    "is_special": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "serving_date_time": {
+      "type": "datetime",
+      "required": true
     }
   }
 }

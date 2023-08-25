@@ -12,27 +12,19 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "meal": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::meal.meal"
+    "valid_from": {
+      "type": "date",
+      "required": false
     },
-    "serving_time": {
-      "type": "enumeration",
-      "enum": [
-        "morning",
-        "evening"
-      ],
+    "valid_till": {
+      "type": "date",
       "required": true
     },
-    "is_special": {
-      "type": "boolean",
-      "default": false,
-      "required": true
+    "name": {
+      "type": "string"
     },
-    "serving_date_time": {
-      "type": "datetime",
-      "required": true
+    "description": {
+      "type": "text"
     }
   }
 }

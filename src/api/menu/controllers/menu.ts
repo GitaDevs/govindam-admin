@@ -4,4 +4,6 @@
 
 import { factories } from '@strapi/strapi'
 
-export default factories.createCoreController('api::menu.menu');
+export const MENU_API_NAME = "api::menu.menu";
+
+export default factories.createCoreController(MENU_API_NAME);
