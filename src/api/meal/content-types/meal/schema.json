@@ -20,11 +20,6 @@
       "type": "decimal",
       "required": true
     },
-    "menus": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::menu.menu"
-    },
     "is_special": {
       "type": "boolean",
       "default": false,
@@ -33,6 +28,18 @@
     "serving_date_time": {
       "type": "datetime",
       "required": true
+    },
+    "menu": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::menu.menu",
+      "inversedBy": "meals"
+    },
+    "dishes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::dish.dish",
+      "inversedBy": "meals"
     }
   }
 }

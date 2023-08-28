@@ -13,11 +13,11 @@
   "pluginOptions": {},
   "attributes": {
     "valid_from": {
-      "type": "date",
-      "required": false
+      "type": "datetime",
+      "required": true
     },
     "valid_till": {
-      "type": "date",
+      "type": "datetime",
       "required": true
     },
     "name": {
@@ -25,6 +25,12 @@
     },
     "description": {
       "type": "text"
+    },
+    "meals": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::meal.meal",
+      "mappedBy": "menu"
     }
   }
 }
