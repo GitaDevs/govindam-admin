@@ -12,27 +12,25 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "meal": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::meal.meal"
-    },
-    "serving_time": {
-      "type": "enumeration",
-      "enum": [
-        "morning",
-        "evening"
-      ],
-      "required": true
-    },
-    "is_special": {
-      "type": "boolean",
-      "default": false,
-      "required": true
-    },
-    "serving_date_time": {
+    "valid_from": {
       "type": "datetime",
       "required": true
+    },
+    "valid_till": {
+      "type": "datetime",
+      "required": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "meals": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::meal.meal",
+      "mappedBy": "menu"
     }
   }
 }

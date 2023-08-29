@@ -70,11 +70,6 @@
     },
     "phone_number": {
       "type": "string"
-    },
-    "subscription": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::subscription.subscription"
     }
   }
 }

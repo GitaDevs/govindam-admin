@@ -20,11 +20,26 @@
       "type": "decimal",
       "required": true
     },
-    "meal_items": {
+    "is_special": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "serving_date_time": {
+      "type": "datetime",
+      "required": true
+    },
+    "menu": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::meal-item.meal-item",
-      "mappedBy": "meal"
+      "relation": "manyToOne",
+      "target": "api::menu.menu",
+      "inversedBy": "meals"
+    },
+    "dishes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::dish.dish",
+      "inversedBy": "meals"
     }
   }
 }

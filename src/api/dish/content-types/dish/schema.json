@@ -42,6 +42,12 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::unit.unit"
+    },
+    "meals": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::meal.meal",
+      "mappedBy": "dishes"
     }
   }
 }
