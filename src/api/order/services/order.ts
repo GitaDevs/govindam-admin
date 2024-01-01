@@ -4,7 +4,7 @@
 
 import { factories } from '@strapi/strapi';
 import { DateTime } from "luxon";
-import { ACCEPT_ORDER_REQUEST_BEFORE } from '../../../helpers/constants';
+import { MealTimings, mealTimeThresholdHours } from '../../../helpers/constants';
 import { ErrorFactory } from '../../../errors/helpers';
 import { ORDER_ALREADY_ACCEPTED, ORDER_NOT_FOUND, ORDER_UNABLE_TO_UPDATE } from '../../../errors/error-messages';
 import { IOrderUpdateRequestBody } from '../type/order';
@@ -12,12 +12,13 @@ import { has, pick } from 'lodash';
 import { ORDER_API_NAME } from '../controllers/order';
 
 export default factories.createCoreService('api::order.order', ({ strapi}) => ({
-  orderCreationTimeValid(menuTime: DateTime): boolean {
+  orderCreationTimeValid(mealTime: DateTime, servingTime: MealTimings): boolean {
     const currentDatetime = DateTime.local(); // Current datetime
 
-    const differenceInHours = menuTime.diff(currentDatetime, 'hours').hours;
+    const differenceInHours = mealTime.minus({ hours: mealTimeThresholdHours[servingTime]})
+      .diff(currentDatetime, 'hours').hours;
 
-    return differenceInHours >= ACCEPT_ORDER_REQUEST_BEFORE;
+    return differenceInHours >= 0;
   },
 
   async cookOrderUpdate(orderId: number, body: IOrderUpdateRequestBody) {
@@ -34,7 +35,7 @@ export default factories.createCoreService('api::order.order', ({ strapi}) => ({
     const updatedOrder = await strapi.entityService.update(ORDER_API_NAME, Number(orderId), {
       data: {
         is_accepted: isAccepted,
-        accepted_at: DateTime.local().toISO()
+        processed_at: DateTime.local().toISO()
       }
     })
 
@@ -59,7 +60,7 @@ export default factories.createCoreService('api::order.order', ({ strapi}) => ({
   },
 
   async orderExist(orderId: number) {
-    const orderExists = await strapi.entityService.findOne("api::order.order", Number(orderId));
+    const orderExists = await strapi.entityService.findOne(ORDER_API_NAME, Number(orderId));
 
     if(!orderExists) throw new ErrorFactory("NOT_FOUND_ERROR", ORDER_NOT_FOUND);
 

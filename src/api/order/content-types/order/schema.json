@@ -20,10 +20,10 @@
     "is_accepted": {
       "type": "boolean"
     },
-    "menus": {
+    "meals": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::menu.menu"
+      "target": "api::meal.meal"
     },
     "health_issue": {
       "type": "string"
@@ -31,7 +31,7 @@
     "meal_instructions": {
       "type": "text"
     },
-    "accepted_at": {
+    "processed_at": {
       "type": "datetime"
     }
   }

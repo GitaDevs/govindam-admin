@@ -1,5 +1,5 @@
 export interface IOrderCreateRequestBody {
-  menuId: number;
+  mealId: number;
   healthIssue?: string;
   mealInstructions?: string;
 }

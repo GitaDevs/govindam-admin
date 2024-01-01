@@ -14,10 +14,11 @@ export default {
       where: {
         id: menuId
       }
-    })
+    });
 
     const mealMenuData = {
-      serving_date_time: data.serving_date_time,
+      serving_date: data.serving_date,
+      serving_time: data.serving_time,
       menu: {
         valid_from: menuData.valid_from,
         valid_till: menuData.valid_till,
@@ -41,7 +42,8 @@ export default {
     });
 
     const mealMenuData = {
-      serving_date_time: data.serving_date_time,
+      serving_date: data.serving_date,
+      serving_time: data.serving_time,
       menu: {
         valid_from: mealData.menu.valid_from,
         valid_till: mealData.menu.valid_till,
