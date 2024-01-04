@@ -23,7 +23,6 @@ export default factories.createCoreController(ORDER_API_NAME, ({ strapi}) => ({
       const meal = await strapi.entityService.findOne(MEAL_API_NAME, Number(mealId));
 
       if(!meal) throw new ErrorFactory("NOT_FOUND_ERROR", MENU_NOT_FOUND);
-      // if(!meal.is_special) throw new ErrorFactory("VALIDATION_ERROR", NOT_SPECIAL_MENU);
 
       const currentMealTime = mealTimingLimits[meal.serving_time as MealTimings];
       const mealTime: DateTime = DateTime.fromFormat(`${meal.serving_date} ${currentMealTime}`, 'yyyy-MM-dd hh:mm a')
@@ -58,12 +57,15 @@ export default factories.createCoreController(ORDER_API_NAME, ({ strapi}) => ({
           },
           health_issue: body.healthIssue,
           meal_instructions: body.mealInstructions,
+          is_cancelled: body.isCancelled,
+          processed_at: body.isCancelled ? DateTime.local().toISO() : null,
           publishedAt: (new Date()).toISOString(),
         },
       })
 
-      const sanitizedResults = await this.sanitizeOutput(newOrder, ctx);
-      return this.transformResponse(sanitizedResults);
+      const createdOrder = await strapi.service(ORDER_API_NAME).getOrderById(newOrder.id);
+
+      return createdOrder;
     } catch(error) {
       return handleError(error, ctx);
     }
@@ -83,16 +85,7 @@ export default factories.createCoreController(ORDER_API_NAME, ({ strapi}) => ({
         results = await strapi.service(ORDER_API_NAME).customerOrderUpdate(id, body);
       }
 
-      const order = await strapi.entityService.findOne(ORDER_API_NAME, Number(id), {
-        populate: {
-          meals: {
-            fields: ["id", "name", "price", "is_special", "rating", "serving_date", "serving_time"]
-          },
-          users: {
-            fields: ["id", "username", "address", "phone_number"]
-          }
-        }        
-      })
+      const order = await strapi.service(ORDER_API_NAME).getOrderById(id);
 
       return order;
     } catch(error) {

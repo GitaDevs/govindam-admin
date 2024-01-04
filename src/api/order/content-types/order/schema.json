@@ -33,6 +33,9 @@
     },
     "processed_at": {
       "type": "datetime"
+    },
+    "is_cancelled": {
+      "type": "boolean"
     }
   }
 }

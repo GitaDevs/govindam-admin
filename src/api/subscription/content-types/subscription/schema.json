@@ -4,7 +4,8 @@
   "info": {
     "singularName": "subscription",
     "pluralName": "subscriptions",
-    "displayName": "Subscription"
+    "displayName": "Subscription",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -41,6 +42,10 @@
     },
     "price": {
       "type": "decimal",
+      "required": true
+    },
+    "valid_days": {
+      "type": "integer",
       "required": true
     }
   }

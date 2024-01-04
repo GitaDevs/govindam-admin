@@ -10,3 +10,4 @@ export const ALERT_NOT_FOUND = "Alert data not found!"
 export const MEAL_TIME_INVALID = "Meal time is invalid! Check Menu valid date!"
 export const NEXT_MEAL_NOT_FOUND = "No next Meal found"
 export const USER_MEAL_ORDER_EXIST = "User has already created order for this meal!"
+export const ORDER_CANCELLED = "Order already cancelled by the user!";

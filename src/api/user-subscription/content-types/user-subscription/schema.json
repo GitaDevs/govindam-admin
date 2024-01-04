@@ -4,19 +4,20 @@
   "info": {
     "singularName": "user-subscription",
     "pluralName": "user-subscriptions",
-    "displayName": "UserSubscription"
+    "displayName": "UserSubscription",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "valid_from": {
-      "type": "datetime",
+    "starts": {
+      "type": "date",
       "required": true
     },
-    "valid_till": {
-      "type": "datetime",
+    "ends": {
+      "type": "date",
       "required": true
     },
     "is_active": {

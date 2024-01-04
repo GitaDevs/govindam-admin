@@ -1,5 +1,6 @@
 export interface IOrderCreateRequestBody {
   mealId: number;
+  isCancelled?: boolean;
   healthIssue?: string;
   mealInstructions?: string;
 }
