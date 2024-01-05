@@ -46,7 +46,7 @@
     },
     "valid_days": {
       "type": "integer",
-      "required": true
+      "required": false
     }
   }
 }

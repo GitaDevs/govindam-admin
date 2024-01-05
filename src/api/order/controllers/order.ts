@@ -7,7 +7,7 @@ import { IOrderCreateRequestBody, IOrderUpdateRequestBody } from '../type/order'
 import { ErrorFactory, handleError } from '../../../errors/helpers';
 import { MENU_NOT_FOUND, NEXT_MEAL_NOT_FOUND, ORDER_CREATION_TIME_PASSED, USER_MEAL_ORDER_EXIST } from '../../../errors/error-messages';
 import { DateTime } from 'luxon';
-import { COOK, EVENING, MORNING, MealTimings, mealTimingLimits } from '../../../helpers/constants';
+import { COOK, CUSTOMER, EVENING, MORNING, MealTimings, mealTimingLimits } from '../../../helpers/constants';
 import { MEAL_API_NAME } from '../../meal/controllers/meal';
 
 export const ORDER_API_NAME = "api::order.order";
@@ -95,6 +95,13 @@ export default factories.createCoreController(ORDER_API_NAME, ({ strapi}) => ({
 
   async specialOrderFetch(ctx) {
     try {
+      const userRole = ctx.state.user.role.type;
+
+      if(userRole === CUSTOMER) {
+        const specialOrders = await this.fetchSpecialOrderforUser();
+        return specialOrders;
+      }
+
       const currentTime = DateTime.local();
       let servingTime = MORNING;
 
@@ -136,5 +143,27 @@ export default factories.createCoreController(ORDER_API_NAME, ({ strapi}) => ({
     } catch(error) {
       return handleError(error, ctx);
     }
+  },
+
+  async fetchSpecialOrderforUser() {
+    const nextMeals = await strapi.service(MEAL_API_NAME).getUpcomingMeals(3, ["id"]);
+
+    const specialOrders = await strapi.entityService.findMany(ORDER_API_NAME, {
+      filters: {
+        meals: {
+          id: nextMeals.map(meal => meal.id)
+        }
+      },
+      populate: {
+        meals: {
+          fields: ["id", "name", "price", "is_special", "rating", "serving_date", "serving_time"]
+        },
+        users: {
+          fields: ["id", "username", "address", "phone_number"]
+        }
+      }
+    })
+
+    return specialOrders;
   }
 }));
