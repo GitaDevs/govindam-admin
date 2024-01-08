@@ -38,9 +38,9 @@ export class ErrorFactory {
         this.status = 400;
         return new errors.ValidationError(message, details);
 
-      case "DUPLICATE_ERROR":
-        this.status = 409;
-        return new DuplicateEntryError(message, details);
+      // case "DUPLICATE_ERROR":
+      //   this.status = 409;
+      //   return new DuplicateEntryError(message, details);
 
       case "APP_ERROR":
       default:

@@ -24,5 +24,26 @@ export default factories.createCoreService(USER_SUBS_API_NAME, ({strapi}) => ({
     });
 
     return count;
+  },
+
+  async getUserActiveSubsription(userId: string | number) {
+    const currentDate = DateTime.local().startOf('day').toFormat('yyyy-MM-dd');
+
+    const userSub = await strapi.db.query(USER_SUBS_API_NAME).findOne({
+      where: {
+        users: {
+          id: userId
+        },
+        starts: {
+          $lte: currentDate
+        },
+        ends: {
+          $gte: currentDate
+        },
+        is_active: true        
+      }
+    })
+
+    return userSub;
   }
 }));
