@@ -11,7 +11,7 @@ export const ALERT_API_NAME = "api::inventory-alert.inventory-alert";
 export default factories.createCoreController(ALERT_API_NAME, ({ strapi }) => ({
   async createAlert(ctx) {
     try {
-      const body = ctx.request.body.data as IAlertCreateBody;
+      const body = ctx.request.body as IAlertCreateBody;
       const userId = ctx.state.user.id;
 
       const newAlert = await strapi.entityService.create(ALERT_API_NAME, {
@@ -26,6 +26,7 @@ export default factories.createCoreController(ALERT_API_NAME, ({ strapi }) => ({
               { id: userId }
             ]
           },
+          description: body.description || "",
           publishedAt: (new Date()).toISOString(),
           api: true
         }

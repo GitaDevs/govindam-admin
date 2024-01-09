@@ -16,5 +16,13 @@ module.exports = {
         policies: ["global::only-cook-customer"]
       }
     },
+    {
+      method: "GET",
+      path: "/special-order",
+      handler: "order.specialOrderFetch",
+      config: {
+        policies: ["global::only-cook-customer"]
+      }
+    }
   ],
 };
