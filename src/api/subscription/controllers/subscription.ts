@@ -4,4 +4,6 @@
 
 import { factories } from '@strapi/strapi'
 
-export default factories.createCoreController('api::subscription.subscription');
+export const SUB_API_NAME = 'api::subscription.subscription';
+
+export default factories.createCoreController(SUB_API_NAME);

@@ -71,16 +71,11 @@
     "phone_number": {
       "type": "string"
     },
-    "orders": {
+    "order_ledgers": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::order.order",
+      "target": "api::order-ledger.order-ledger",
       "mappedBy": "user"
-    },
-    "subscription": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::subscription.subscription"
     }
   }
 }

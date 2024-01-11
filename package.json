@@ -13,12 +13,16 @@
     "@strapi/plugin-i18n": "4.10.2",
     "@strapi/plugin-users-permissions": "4.10.2",
     "@strapi/strapi": "4.10.2",
-    "@strapi/utils": "^4.12.5",
+    "@strapi/utils": "^4.16.2",
     "@types/lodash": "^4.14.197",
     "@types/luxon": "^3.3.1",
+    "i": "^0.3.7",
     "lodash": "^4.17.21",
     "luxon": "^3.4.0",
-    "pg": "8.8.0"
+    "npm": "^10.2.5",
+    "pg": "8.8.0",
+    "strapi-provider-email-brevo": "^1.0.4",
+    "uuid": "^9.0.1"
   },
   "author": {
     "name": "GitaDevs"

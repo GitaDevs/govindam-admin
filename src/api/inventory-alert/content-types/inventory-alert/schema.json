@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "inventory_alerts",
+  "info": {
+    "singularName": "inventory-alert",
+    "pluralName": "inventory-alerts",
+    "displayName": "Inventory Alert",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "raw_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::raw-item.raw-item"
+    },
+    "request_fullfilled": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "created_by_users": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user"
+    },
+    "request_fullfilled_by_users": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user"
+    },
+    "request_fullfilled_at": {
+      "type": "datetime"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

@@ -20,11 +20,42 @@
       "type": "decimal",
       "required": true
     },
-    "meal_items": {
+    "is_special": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "menu": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::meal-item.meal-item",
-      "mappedBy": "meal"
+      "relation": "manyToOne",
+      "target": "api::menu.menu",
+      "inversedBy": "meals"
+    },
+    "dishes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::dish.dish",
+      "inversedBy": "meals"
+    },
+    "rating": {
+      "type": "decimal",
+      "min": 0,
+      "max": 5,
+      "default": 0,
+      "required": true
+    },
+    "serving_date": {
+      "type": "date",
+      "required": true
+    },
+    "serving_time": {
+      "type": "enumeration",
+      "enum": [
+        "morning",
+        "noon",
+        "evening"
+      ],
+      "required": true
     }
   }
 }

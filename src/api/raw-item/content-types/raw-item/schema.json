@@ -31,14 +31,14 @@
       "relation": "oneToMany",
       "target": "api::category.category"
     },
-    "purchasing_units": {
+    "purchasing_unit": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "oneToOne",
       "target": "api::unit.unit"
     },
-    "consumption_units": {
+    "consumption_unit": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "oneToOne",
       "target": "api::unit.unit"
     },
     "converstion_ratio": {

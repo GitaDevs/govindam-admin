@@ -1,9 +1,12 @@
 export interface IOrderCreateRequestBody {
-  menuId: number;
+  mealId: number;
+  isCancelled?: boolean;
   healthIssue?: string;
   mealInstructions?: string;
 }
 
 export interface IOrderUpdateRequestBody {
   isAccepted?: boolean;
+  healthIssue?: string;
+  mealInstructions?: string;
 }
