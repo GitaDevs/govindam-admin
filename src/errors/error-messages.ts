@@ -11,3 +11,5 @@ export const MEAL_TIME_INVALID = "Meal time is invalid! Check Menu valid date!"
 export const NEXT_MEAL_NOT_FOUND = "No next Meal found"
 export const USER_MEAL_ORDER_EXIST = "User has already created order for this meal!"
 export const ORDER_CANCELLED = "Order already cancelled by the user!";
+export const SUB_DOES_NOT_EXIST = "Subscription requested is not a valid one!"
+export const USER_ALREADY_HAS_SUB = "User already has a valid subscription!"

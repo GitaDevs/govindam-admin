@@ -70,6 +70,12 @@
     },
     "phone_number": {
       "type": "string"
+    },
+    "order_ledgers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order-ledger.order-ledger",
+      "mappedBy": "user"
     }
   }
 }

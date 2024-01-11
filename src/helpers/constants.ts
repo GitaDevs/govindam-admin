@@ -23,3 +23,8 @@ export const mealTimeThresholdHours: {[key: string]: number} = {
   [NOON]: 9,
   [EVENING]: 9
 }
+
+// in rupees
+export const FINE_PER_DAY = 100;
+// date after which fine will be applied
+export const DATE_AFTER_FIND_APPLIED = 5;
