@@ -9,6 +9,7 @@ import { MENU_NOT_FOUND, NEXT_MEAL_NOT_FOUND, ORDER_CREATION_TIME_PASSED, USER_M
 import { DateTime } from 'luxon';
 import { COOK, CUSTOMER, EVENING, MORNING, MealTimings, mealTimingLimits } from '../../../helpers/constants';
 import { MEAL_API_NAME } from '../../meal/controllers/meal';
+import { DateTimeLocal } from '../../../helpers/helpers';
 
 export const ORDER_API_NAME = "api::order.order";
 
@@ -58,7 +59,7 @@ export default factories.createCoreController(ORDER_API_NAME, ({ strapi}) => ({
           health_issue: body.healthIssue,
           meal_instructions: body.mealInstructions,
           is_cancelled: body.isCancelled,
-          processed_at: body.isCancelled ? DateTime.local().toISO() : null,
+          processed_at: body.isCancelled ? DateTimeLocal.local().toISO() : null,
           publishedAt: (new Date()).toISOString(),
         },
       })
@@ -102,7 +103,7 @@ export default factories.createCoreController(ORDER_API_NAME, ({ strapi}) => ({
         return specialOrders;
       }
 
-      const currentTime = DateTime.local();
+      const currentTime = DateTimeLocal.local();
       let servingTime = MORNING;
 
       if(currentTime.hour < 9) {

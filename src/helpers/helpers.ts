@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import { ADMIN_NAME, SUPER_ADMIN_NAME } from "./constants";
 
 export function isAdmin(user): boolean {
@@ -12,3 +13,12 @@ export function isAdmin(user): boolean {
     return false;
   }
 }
+
+const DEFAULT_TIMEZONE = 'Asia/Kolkata';
+
+export const DateTimeLocal = {
+  local: () => DateTime.local().setZone(DEFAULT_TIMEZONE),
+
+  fromISO: (isoString) => DateTime.fromISO(isoString).setZone(DEFAULT_TIMEZONE),
+  fromMillis: (millis) => DateTime.fromMillis(millis).setZone(DEFAULT_TIMEZONE),
+};

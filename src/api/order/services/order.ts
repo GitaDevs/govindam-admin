@@ -10,10 +10,11 @@ import { ORDER_ALREADY_ACCEPTED, ORDER_CANCELLED, ORDER_NOT_FOUND, ORDER_UNABLE_
 import { IOrderUpdateRequestBody } from '../type/order';
 import { has, pick } from 'lodash';
 import { ORDER_API_NAME } from '../controllers/order';
+import { DateTimeLocal } from '../../../helpers/helpers';
 
 export default factories.createCoreService('api::order.order', ({ strapi}) => ({
   orderCreationTimeValid(mealTime: DateTime, servingTime: MealTimings): boolean {
-    const currentDatetime = DateTime.local(); // Current datetime
+    const currentDatetime = DateTimeLocal.local(); // Current datetime
 
     const differenceInHours = mealTime.minus({ hours: mealTimeThresholdHours[servingTime]})
       .diff(currentDatetime, 'hours').hours;
@@ -36,7 +37,7 @@ export default factories.createCoreService('api::order.order', ({ strapi}) => ({
     const updatedOrder = await strapi.entityService.update(ORDER_API_NAME, Number(orderId), {
       data: {
         is_accepted: isAccepted,
-        processed_at: DateTime.local().toISO()
+        processed_at: DateTimeLocal.local().toISO()
       }
     })
 

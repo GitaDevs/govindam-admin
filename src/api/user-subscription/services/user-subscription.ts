@@ -9,12 +9,13 @@ import { SUB_DOES_NOT_EXIST, USER_ALREADY_HAS_SUB } from '../../../errors/error-
 import { SUB_API_NAME } from '../../subscription/controllers/subscription';
 import { DATE_AFTER_FIND_APPLIED, FINE_PER_DAY } from '../../../helpers/constants';
 import { PaymentDetails } from '../type/user-subscription';
+import { DateTimeLocal } from '../../../helpers/helpers';
 
 export const USER_SUBS_API_NAME = 'api::user-subscription.user-subscription';
 
 export default factories.createCoreService(USER_SUBS_API_NAME, ({strapi}) => ({
   async usersCountDiningToday() {
-    const currentDate = DateTime.local().startOf('day').toFormat('yyyy-MM-dd');
+    const currentDate = DateTimeLocal.local().startOf('day').toFormat('yyyy-MM-dd');
 
     const count = await strapi.db.query(USER_SUBS_API_NAME).count({
       where: {
@@ -32,7 +33,7 @@ export default factories.createCoreService(USER_SUBS_API_NAME, ({strapi}) => ({
   },
 
   async getUserActiveSubsription(userId: string | number) {
-    const currentDate = DateTime.local().startOf('day').toFormat('yyyy-MM-dd');
+    const currentDate = DateTimeLocal.local().startOf('day').toFormat('yyyy-MM-dd');
 
     const userSub = await strapi.db.query(USER_SUBS_API_NAME).findOne({
       where: {
@@ -67,7 +68,7 @@ export default factories.createCoreService(USER_SUBS_API_NAME, ({strapi}) => ({
     }
     
     // calculate fine
-    const todayDayOfMonth = DateTime.local().day;
+    const todayDayOfMonth = DateTimeLocal.local().day;
     let totalFineApplied = 0;
 
     if(todayDayOfMonth > DATE_AFTER_FIND_APPLIED) {

@@ -5,10 +5,11 @@
 import { factories } from '@strapi/strapi';
 import { MEAL_API_NAME } from '../controllers/meal';
 import { DateTime } from 'luxon';
+import { DateTimeLocal } from '../../../helpers/helpers';
 
 export default factories.createCoreService(MEAL_API_NAME, ({strapi}) => ({
   async getUpcomingMeals(limit = 3, select: string[] = []) {
-    const currentTime = DateTime.local();
+    const currentTime = DateTimeLocal.local();
     
     const params = {
       select,
