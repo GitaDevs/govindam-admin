@@ -37,7 +37,7 @@ export default factories.createCoreService(USER_SUBS_API_NAME, ({strapi}) => ({
 
     const userSub = await strapi.db.query(USER_SUBS_API_NAME).findOne({
       where: {
-        users: {
+        user: {
           id: userId
         },
         starts: {

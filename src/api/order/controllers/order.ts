@@ -97,9 +97,10 @@ export default factories.createCoreController(ORDER_API_NAME, ({ strapi}) => ({
   async specialOrderFetch(ctx) {
     try {
       const userRole = ctx.state.user.role.type;
+      const userId = ctx.state.user.id;
 
       if(userRole === CUSTOMER) {
-        const specialOrders = await this.fetchSpecialOrderforUser();
+        const specialOrders = await this.fetchSpecialOrderforUser(userId);
         return specialOrders;
       }
 
@@ -146,13 +147,16 @@ export default factories.createCoreController(ORDER_API_NAME, ({ strapi}) => ({
     }
   },
 
-  async fetchSpecialOrderforUser() {
+  async fetchSpecialOrderforUser(userId: string) {
     const nextMeals = await strapi.service(MEAL_API_NAME).getUpcomingMeals(3, ["id"]);
 
     const specialOrders = await strapi.entityService.findMany(ORDER_API_NAME, {
       filters: {
         meals: {
           id: nextMeals.map(meal => meal.id)
+        },
+        users: {
+          id: userId
         }
       },
       populate: {
