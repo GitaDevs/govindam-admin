@@ -4,6 +4,6 @@ export default {
   async beforeCreate(event) {
     const { data } = event.params;
 
-    await validateUserAndMenuUnique(data)  
+    await validateUserAndMenuUnique(data);
   }
 }

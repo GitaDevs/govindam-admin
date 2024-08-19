@@ -104,7 +104,7 @@ export default factories.createCoreService('api::order.order', ({ strapi}) => ({
         users: {
           fields: ["id", "username", "address", "phone_number"]
         }
-      }        
+      }
     });
 
     return order;
