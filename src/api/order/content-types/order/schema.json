@@ -35,7 +35,9 @@
       "type": "datetime"
     },
     "is_cancelled": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }

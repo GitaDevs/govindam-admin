@@ -27,11 +27,11 @@
     "category_type": {
       "type": "enumeration",
       "enum": [
-        "RAW_ITEM",
+        "NON_FOOD_ITEM",
         "DISH",
         "FOOD_ITEM"
       ],
-      "default": "RAW_ITEM",
+      "default": "NON_FOOD_ITEM",
       "required": false
     }
   }

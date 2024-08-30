@@ -28,3 +28,12 @@ export const mealTimeThresholdHours: {[key: string]: number} = {
 export const FINE_PER_DAY = 100;
 // date after which fine will be applied
 export const DATE_AFTER_FIND_APPLIED = 5;
+
+
+export const mealDisappearTimingLimits: {[key: string]: string} = {
+  [MORNING]: "12:00 PM",
+  [NOON]: "03:00 PM",
+  [EVENING]: "09:00 PM"
+}
+
+export const MEAL_TIMING_WINDOW = 5; // in hours

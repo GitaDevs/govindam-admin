@@ -58,7 +58,7 @@ export default factories.createCoreController(ORDER_API_NAME, ({ strapi}) => ({
           },
           health_issue: body.healthIssue,
           meal_instructions: body.mealInstructions,
-          is_cancelled: body.isCancelled,
+          is_cancelled: !!body.isCancelled,
           processed_at: body.isCancelled ? DateTimeLocal.local().toISO() : null,
           publishedAt: (new Date()).toISOString(),
         },
@@ -104,13 +104,17 @@ export default factories.createCoreController(ORDER_API_NAME, ({ strapi}) => ({
         return specialOrders;
       }
 
-      const currentTime = DateTimeLocal.local();
+      let currentTime = DateTimeLocal.local();
       let servingTime = MORNING;
 
       if(currentTime.hour < 9) {
         servingTime = MORNING;
       } else if(currentTime.hour < 21) {
         servingTime = EVENING;
+      } else {
+        // after 9 PM show tomorrow's morning meal
+        currentTime = currentTime.plus({ days: 1 }).startOf('day');
+        servingTime = MORNING;
       }
 
       const nextMeal = await strapi.db.query(MEAL_API_NAME).findOne({
@@ -129,7 +133,8 @@ export default factories.createCoreController(ORDER_API_NAME, ({ strapi}) => ({
         filters: {
           meals: {
             id: nextMeal.id
-          }
+          },
+          is_cancelled: false
         },
         populate: {
           meals: {
